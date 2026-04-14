@@ -18,7 +18,7 @@ function checkGuess(guess) {
 }
 
 // Initialized
-function start() {
+function game() {
     correctNumber = generateRandomNumber();
     attempts = 0;
     gameWon = false;
@@ -40,11 +40,11 @@ Type: %cguess(number)`,
 function guess(value) {
     // Check if the game is active or already over
     if (correctNumber === null) {
-        console.log("Error: System inactive. Use start().");
+        console.log("Error: System inactive. Use game().");
         return;
     }
     if (gameWon) {
-        console.log("Error: Game already won. Use start().");
+        console.log("Error: Game already won. Use game().");
         return;
     }
 
@@ -99,7 +99,7 @@ function guess(value) {
 
 // Input
 console.log(
-    "Welcome, human. Type %cstart()%c and press Enter to begin...",
+    "Welcome, human. Type %cgame()%c and press Enter to begin...",
     "color: green;",
     "color: inherit;"
 );

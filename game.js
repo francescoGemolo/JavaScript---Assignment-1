@@ -1,71 +1,77 @@
-// Genera un numero casuale tra 1 e 100
+// Generate random number (1-100)
 function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 
-// Chiede un input al giocatore
-function getPlayerGuess() {
-    let input = prompt("Enter a number between 1 and 100:")
+// Get valid user input
+function getPlayerGuess(message) {
+    let input = prompt(message);
 
     while (
         input === null ||
         input.trim() === "" ||
         isNaN(Number(input)) ||
-        !Number.isInteger(Number(input)) ||
         Number(input) < 1 ||
-        Number(input) > 100
+        Number(input) > 100 ||
+        !Number.isInteger(Number(input))
     ) {
-        input = prompt("Invalid input.Please enter a whole number between 1 and 100:");
+        if (input === null) {
+            input = prompt("No escape Human!\nTry again.");
+        } else {
+            input = prompt("Invalid number (1-100).\nTry again.");
+        }
     }
 
     return Number(input);
 }
 
-// Confronta il guess con il numero corretto e restituisce una stringa
-function checkGuess(playerGuess, correctNumber) {
-    if (playerGuess < correctNumber) return "Too low!";
-    if (playerGuess > correctNumber) return "Too high!";
-    return "Correct!"
+// Compare guess with correct number
+function checkGuess(guess, correctNumber) {
+    if (guess < correctNumber) return "Too low :(";
+    if (guess > correctNumber) return "Too high!";
+    return "Correct!";
 }
 
-// Logica principale del gioco
+// Main logic
 function game() {
-    const MAX_ATTEMPTS = 10;
-    const secretNumber = generateRandomNumber();
+    let correctNumber = generateRandomNumber();
     let attempts = 0;
-    let result = "";
+    let maxAttempts = 10;
 
-    console.log("Number Guessing Game");
-    console.log("I'm thinking of a number between 1 and 100. You have 10 attempts. Good luck!");
+    let intro = `Hello Human...\n
+                Guess the number (1-100).\n
+                You have 10 attempts.`;
 
-    while (attempts < MAX_ATTEMPTS) {
-        const guess = getPlayerGuess();
+    while (attempts < maxAttempts) {
+        let guess;
+
+        if (attempts === 0) {
+            guess = getPlayerGuess(intro);
+        } else if (attempts === maxAttempts - 1) {
+            guess = getPlayerGuess("Last chance Human!");
+        } else {
+            guess = getPlayerGuess(`Wrong!\nAttempts left: ${maxAttempts - attempts}`);
+        }
+
         attempts++;
 
-        result = checkGuess(guess, secretNumber);
+        let result = checkGuess(guess, correctNumber);
 
         if (result === "correct") {
-            break;
-        }
+            // calculate score
+            let score = (maxAttempts - attempts + 1) * 10;
 
-        const remaining = MAX_ATTEMPTS - attempts;
-        if (remaining > 0) {
-            console.log(`Your guess is ${result}! You have ${remaining} attempt${remaining === 1 ? "" : "s"} left.`);
+            alert(`YOU WIN!\nAttempts: ${attempts}\nScore: ${score}`);
+            return;
+        } else if (result === "too low") {
+            alert("Too low!");
+        } else {
+            alert("Too high!");
         }
     }
+
+    alert(`GAME OVER!\nNumber was: ${correctNumber}`);
 }
 
-// Output
-console.log("----------------------------");
-if (result === "correct") {
-    const score = Math.max(0, (MAX_ATTEMPTS - attempts + 1) * 100);
-    console.log(`🎉 You win! The number was ${secretNumber}.`);
-    console.log(`Attempts used: ${attempts} / ${MAX_ATTEMPTS}`);
-    console.log(`Your score: ${score} points`);
-} else {
-    console.log(`Game over! The number was ${secretNumber}.`);
-    console.log(`Attempts used: ${attempts} / ${MAX_ATTEMPTS}`);
-}
-
-// Call
+// Start game
 game();

@@ -72,7 +72,6 @@ Try to survive`;
 
         let result = checkGuess(guess, correctNumber);
 
-        // FIX QUI
         if (result === "Correct!") {
             let score = (maxAttempts - attempts + 1) * 10;
 
@@ -80,7 +79,6 @@ Try to survive`;
             return;
         }
 
-        // FIX QUI
         if (result === "Too low!") {
             alert("Too low...");
         } else {

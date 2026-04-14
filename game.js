@@ -54,3 +54,18 @@ function game() {
         }
     }
 }
+
+// Output
+console.log("----------------------------");
+if (result === "correct") {
+    const score = Math.max(0, (MAX_ATTEMPTS - attempts + 1) * 100);
+    console.log(`🎉 You win! The number was ${secretNumber}.`);
+    console.log(`Attempts used: ${attempts} / ${MAX_ATTEMPTS}`);
+    console.log(`Your score: ${score} points`);
+} else {
+    console.log(`Game over! The number was ${secretNumber}.`);
+    console.log(`Attempts used: ${attempts} / ${MAX_ATTEMPTS}`);
+}
+
+// Call
+game();

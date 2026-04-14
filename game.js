@@ -20,3 +20,18 @@ function getPlayerGuess() {
 
     return Number(input);
 }
+
+// Confronta il guess con il numero corretto e restituisce una stringa
+function checkGuess(playerGuess, correctNumber) {
+    if (playerGuess < correctNumber) return "Too low!";
+    if (playerGuess > correctNumber) return "Too high!";
+    return "Correct!"
+}
+
+// Logica principale del gioco
+function game() {
+    const MAX_ATTEMPTS = 10;
+    const secretNumber = generateRandomNumber();
+    let attempts = 0;
+    let result = "";
+}

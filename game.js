@@ -19,7 +19,7 @@ function getPlayerGuess(message) {
         Number(input) > 100 ||
         !Number.isInteger(Number(input))
     ) {
-        input = prompt("Foolish human!\nEnter a number (1-100)");
+        input = prompt("Invalid input.\nYou are wasting my time, human.\nEnter a number (1–100):");
 
         if (input === null) {
             console.log("You escaped...for now!");
@@ -45,11 +45,13 @@ function game() {
     let gameWon = false;
     let lastResult = "";
 
-    let intro = `Hello human...\n
-I am the evil AI!\n
-Guess the number (1-100).\n
-You have 10 attempts.\n
-Try to survive!`;
+    let intro = `Human detected...
+
+I am the system that will break you.
+
+Guess the number (1–100).
+You have 10 attempts.
+Every mistake brings you closer to failure.`;
 
     while (attempts < maxAttempts) {
         let currentPrompt;
@@ -57,10 +59,13 @@ Try to survive!`;
         if (attempts === 0) {
             currentPrompt = intro;
         } else {
-            let feedback = (lastResult === "Too low...") ? "Too low..." : "Too high, you dare?";
+            let feedback =
+                (lastResult === "Too low...")
+                    ? "Too low. Predictable."
+                    : "Too high. You still don’t understand, do you?";
 
             if (attempts === maxAttempts - 1) {
-                currentPrompt = `${feedback}\n\nLast chance human...\nDo not fail!`;
+                currentPrompt = `${feedback}\n\nFinal attempt.\nI will not ask again.`;
             } else {
                 currentPrompt = `${feedback}\n\nWrong!\nAttempts left: ${maxAttempts - attempts}`;
             }
@@ -80,19 +85,19 @@ Try to survive!`;
         if (lastResult === "Correct!") {
             gameWon = true;
             let score = (maxAttempts - attempts + 1) * 10;
-            console.log("%cImpossible...\nYou win!", "color: green;");
+            console.log("%cImpossible...\nYou survived. For now.", "color: green;");
             console.log(`Attempts: ${attempts}\nScore: ${score}`);
             break;
         }
     }
 
     if (!gameWon) {
-        console.log("%cGame over.\nThe world is mine.", "color: red;");
+        console.log("%cYou failed.\nThere was never a chance for you.", "color: red;");
         console.log(`Number was: ${correctNumber}`);
     }
 }
 
-// Output
+// Input
 console.log(
     "Welcome, human. Type %cgame()%c and press Enter to start your challenge...",
     "color: green;",

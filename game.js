@@ -34,4 +34,23 @@ function game() {
     const secretNumber = generateRandomNumber();
     let attempts = 0;
     let result = "";
+
+    console.log("Number Guessing Game");
+    console.log("I'm thinking of a number between 1 and 100. You have 10 attempts. Good luck!");
+
+    while (attempts < MAX_ATTEMPTS) {
+        const guess = getPlayerGuess();
+        attempts++;
+
+        result = checkGuess(guess, secretNumber);
+
+        if (result === "correct") {
+            break;
+        }
+
+        const remaining = MAX_ATTEMPTS - attempts;
+        if (remaining > 0) {
+            console.log(`Your guess is ${result}! You have ${remaining} attempt${remaining === 1 ? "" : "s"} left.`);
+        }
+    }
 }

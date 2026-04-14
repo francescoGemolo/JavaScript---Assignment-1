@@ -10,7 +10,7 @@ let firstMsg = `Hello Human, I'm the Devil AI!\n
                 If you want to save the world, play a game with me.\n
                 You have to guess a number between 1 and 100.\n
                 You have 10 guesses, are you ready to play?\n
-                Make your choice`
+                Make your choice.`
 let playerGuess = prompt(firstMsg)
 let guessNumber = playerGuess
 

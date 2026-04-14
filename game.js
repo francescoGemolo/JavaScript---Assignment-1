@@ -45,10 +45,10 @@ function game() {
     let maxAttempts = 10;
 
     let intro = `Hello human...\n
-I am the evil AI.\n
-Guess the number (1-100)\n
-You have 10 attempts\n
-Try to survive`;
+I am the evil AI!\n
+Guess the number (1-100).\n
+You have 10 attempts.\n
+Try to survive!`;
 
     while (attempts < maxAttempts) {
         let guess;

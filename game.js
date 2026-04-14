@@ -25,7 +25,7 @@ function getValidNumber(playerNumberInput) {
     ) {
         let newTemp
         if (playerNumberInput === null) {
-            newTemp = prompt("You cant escape this agony Human!\n Try Again.")
+            newTemp = prompt("You can't escape this agony Human!\n Try Again.")
         } else {
             newTemp = prompt("You can't fool me Human!\n Try Again.")
         }

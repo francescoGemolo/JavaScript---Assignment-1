@@ -1,4 +1,4 @@
-[Preview Link](#)
+[Preview Link](https://francescogemolo.github.io/JavaScript---Assignment-1/)
 
 # Number Guessing Game
 

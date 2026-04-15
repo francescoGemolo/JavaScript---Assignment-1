@@ -27,7 +27,7 @@ function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 
-// Check the guess number with the secret one
+// Compare the guess number with the secret one
 function checkGuess(guessNumber, correctNumber) {
     if (guessNumber < correctNumber) return "Low...";
     if (guessNumber > correctNumber) return "High...";

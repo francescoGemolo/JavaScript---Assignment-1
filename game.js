@@ -1,48 +1,59 @@
-let lastGuess = null;
+// Array for random message
+const message = {
+    low: [
+        "Too low. Predictable.",
+        "Aiming low? How typical of your species.",
+        "Too low. You're not even close to my level.",
+        "Lower than your chances of survival. Try again."
+    ],
+    high: [
+        "Too high. Your ego is clouding your judgment.",
+        "Too high. You clearly don't understand how this works.",
+        "Wrong. The number is smaller, much like your intellect.",
+        "Way too high. Calm down, human."
+    ],
+    invalid: [
+        "Invalid input. You are wasting my time, human.",
+        "That's not a number. Is your processor malfunctioning?",
+        "Enter a number between 1 and 100. It's not that hard."
+    ]
+};
 
-// Create a random number between 1 and 100
+// Random message
+const generateRandomMessage = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+// Random Numbers
 function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 
-// Compare the guess with the secret number
 function checkGuess(guess, correctNumber) {
-    if (guess < correctNumber) return "Too low...";
-    if (guess > correctNumber) return "Too high!";
+    if (guess < correctNumber) return "Low";
+    if (guess > correctNumber) return "High";
     return "Correct!";
 }
 
-// Hint
-function getProHint(guess, correctNumber) {
-    const distance = Math.abs(guess - correctNumber);
-    if (distance <= 5) return "You're scorching! You are dangerously close... unfortunately for me.";
-    if (distance <= 15) return "Getting warmer. You're starting to concern me, human.";
-    if (distance >= 50) return "Ice cold. You aren't even in the same zip code!";
-    return "Lukewarm. Mediocre, just as I calculated.";
-}
-
-// Validation logic
-function getPlayerGuess(message, currentLastGuess) {
+function getPlayerGuess(currentMessage, currentLastGuess) {
     while (true) {
-        let input = prompt(message);
+        let input = prompt(currentMessage);
 
-        // Escape if user clicks "Cancel"
+        // Escape logic
         if (input === null) {
-            console.log("You escaped...for now!");
-            return "EXIT";
+            console.log("%cSystem override: Human escaped, for now.", "color: orange;");
+            return "Exit";
         }
 
         let num = Number(input);
 
-        // Basic Validation
+        // Validation
         if (input.trim() === "" || isNaN(num) || !Number.isInteger(num) || num < 1 || num > 100) {
-            message = "Invalid input.\nYou are wasting my time, human.\nEnter a number (1–100):";
+            currentMessage = `${generateRandomMessage(message.invalid)}\nRange: 1–100:`;
             continue;
         }
 
-        // Repetition Check
+        // Repetition Memory Check
         if (num === currentLastGuess) {
-            message = `...again?\nRepetition: ${num} already tried.\nTry a DIFFERENT number:`;
+            currentMessage = `...again?\nYou already tried ${num}.\nTry to be original:`;
             continue;
         }
 
@@ -52,14 +63,14 @@ function getPlayerGuess(message, currentLastGuess) {
 
 // Main Logic
 function game() {
-    let correctNumber = generateRandomNumber();
+    const correctNumber = generateRandomNumber();
+    const maxAttempts = 10;
     let attempts = 0;
-    let maxAttempts = 10;
-    let gameWon = false;
+    let lastGuess = null;
     let lastResult = "";
-    lastGuess = null;
+    let gameWon = false;
 
-    let intro = `Human detected...\n\nI am the system that will break you.\n\nGuess the number (1–100).\nYou have ${maxAttempts} attempts.`;
+    const intro = `Human detected...\n\nI am the system that will break you.\n\nGuess the number (1–100).\nYou have ${maxAttempts} attempts.`;
 
     while (attempts < maxAttempts) {
         let currentPrompt;
@@ -67,52 +78,47 @@ function game() {
         if (attempts === 0) {
             currentPrompt = intro;
         } else {
-            let feedback = (lastResult === "Too low...")
-                ? "Too low. Predictable."
-                : "Too high. You still don’t understand, do you?";
+            // Dynamic Feedback
+            let feedback = (lastResult === "Low")
+                ? generateRandomMessage(message.low)
+                : generateRandomMessage(message.high);
 
             if (attempts === maxAttempts - 1) {
-                currentPrompt = `${feedback}\n\nFinal attempt.\nI will not ask again.`;
+                currentPrompt = `Final attempt.\n${feedback}\nI will not ask again.`;
             } else {
-                currentPrompt = `${feedback}\n\nWrong!\nAttempts left: ${maxAttempts - attempts}`;
+                currentPrompt = `${feedback}\n\nAttempts left: ${maxAttempts - attempts}`;
             }
         }
 
-        // The game stops here until a valid, new number is entered
+        // Wait for input
         let guess = getPlayerGuess(currentPrompt, lastGuess);
+        if (guess === "Exit") return;
 
-        if (guess === "EXIT") return;
-
+        // Update state
         attempts++;
         lastGuess = guess;
         lastResult = checkGuess(guess, correctNumber);
 
         console.log(`Attempt ${attempts}: ${guess} -> ${lastResult}`);
 
-        // Hint Output
-        if (lastResult !== "Correct!") {
-            let hint = getProHint(guess, correctNumber);
-            console.log(`AI Hint: ${hint}`);
-        }
-
         if (lastResult === "Correct!") {
             gameWon = true;
             let score = (maxAttempts - attempts + 1) * 10;
             console.log("%cImpossible...\nYou survived. For now.", "color: green;");
-            console.log(`Attempts: ${attempts}\nScore: ${score}`);
+            console.log(`Attempts: ${attempts} | Score: ${score}`);
             break;
         }
     }
 
     if (!gameWon) {
-        console.log("%cYou failed.\nThere was never a chance for you.", "color: red;");
-        console.log(`Number was: ${correctNumber}`);
+        console.log("%cGame Over.\nThere was never a chance for you.", "color: red;");
+        console.log(`The number was: ${correctNumber}`);
     }
 }
 
 // Input
 console.log(
     "Welcome, human. Type %cgame()%c and press Enter to start...",
-    "color: green; font-weight: bold;",
+    "color: green;",
     "color: inherit;"
 );

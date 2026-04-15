@@ -27,9 +27,10 @@ function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 
-function checkGuess(guess, correctNumber) {
-    if (guess < correctNumber) return "Low...";
-    if (guess > correctNumber) return "High...";
+// Check the guess number with the secret one
+function checkGuess(guessNumber, correctNumber) {
+    if (guessNumber < correctNumber) return "Low...";
+    if (guessNumber > correctNumber) return "High...";
     return "Correct!";
 }
 
@@ -91,15 +92,15 @@ function game() {
         }
 
         // Wait for input
-        let guess = getPlayerGuess(currentPrompt, lastGuess);
-        if (guess === "Exit") return;
+        let guessNumber = getPlayerGuess(currentPrompt, lastGuess);
+        if (guessNumber === "Exit") return;
 
         // Update state
         attempts++;
-        lastGuess = guess;
-        lastResult = checkGuess(guess, correctNumber);
+        lastGuess = guessNumber;
+        lastResult = checkGuess(guessNumber, correctNumber);
 
-        console.log(`Attempt ${attempts}: ${guess} -> ${lastResult}`);
+        console.log(`Attempt ${attempts}: ${guessNumber} -> ${lastResult}`);
 
         if (lastResult === "Correct!") {
             gameWon = true;

@@ -12,6 +12,15 @@ function checkGuess(guess, correctNumber) {
     return "Correct!";
 }
 
+// Hint
+function getProHint(guess, correctNumber) {
+    const distance = Math.abs(guess - correctNumber);
+    if (distance <= 5) return "You're scorching! You are dangerously close... unfortunately for me.";
+    if (distance <= 15) return "Getting warmer. You're starting to concern me, human.";
+    if (distance >= 50) return "Ice cold. You aren't even in the same zip code!";
+    return "Lukewarm. Mediocre, just as I calculated.";
+}
+
 // Validation logic
 function getPlayerGuess(message, currentLastGuess) {
     while (true) {
@@ -79,6 +88,12 @@ function game() {
         lastResult = checkGuess(guess, correctNumber);
 
         console.log(`Attempt ${attempts}: ${guess} -> ${lastResult}`);
+
+        // Hint Output
+        if (lastResult !== "Correct!") {
+            let hint = getProHint(guess, correctNumber);
+            console.log(`AI Hint: ${hint}`);
+        }
 
         if (lastResult === "Correct!") {
             gameWon = true;

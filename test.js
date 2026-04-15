@@ -88,7 +88,7 @@ function guess(value) {
     } else {
         console.log(`Attempt ${attempts}: ${value} -> ${feedback}`);
 
-        // Warning for the very last try
+        // Warning for the last try
         if (attempts === maxAttempts - 1) {
             console.log("%cFinal attempt. I will not ask again.", "color: orange;");
         } else {

@@ -9,7 +9,7 @@ A simple JavaScript-based number guessing game where players try to guess a rand
 The project includes the following files:
 
 ### Files
-- `index.html`: A basic HTML page that loads the JavaScript and provides a black background.
+- `index.html`: A basic HTML page that loads the JavaScript.
 - `game.js`: Contains the game logic for the browser prompt version.
 
 ### Key Functions

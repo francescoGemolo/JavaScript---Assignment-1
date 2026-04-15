@@ -28,8 +28,8 @@ function generateRandomNumber() {
 }
 
 function checkGuess(guess, correctNumber) {
-    if (guess < correctNumber) return "Low";
-    if (guess > correctNumber) return "High";
+    if (guess < correctNumber) return "Low...";
+    if (guess > correctNumber) return "High...";
     return "Correct!";
 }
 
@@ -79,7 +79,7 @@ function game() {
             currentPrompt = intro;
         } else {
             // Dynamic Feedback
-            let feedback = (lastResult === "Low")
+            let feedback = (lastResult === "Low...")
                 ? generateRandomMessage(message.low)
                 : generateRandomMessage(message.high);
 

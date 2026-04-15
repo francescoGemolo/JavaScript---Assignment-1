@@ -106,7 +106,7 @@ function game() {
             let score = (maxAttempts - attempts + 1) * 10;
             console.log(
                 "%cImpossible...\nYou survived. For now.\n\n%cType %cgame()%c and press Enter to play again...",
-                "color: green;",
+                "color: lime;",
                 "color: inherit;",
                 "color: green;",
                 "color: inherit;"

@@ -1,5 +1,4 @@
-## Preview
-[Here!](#)
+[Preview Link](#)
 
 # Number Guessing Game
 
@@ -23,7 +22,6 @@ The game uses these JavaScript functions:
 - `game()`: Main function that initializes the game, manages the loop for up to 10 attempts, and provides AI-themed feedback using `console.log()`.
 
 The game uses browser prompts for input and console output for feedback.
-
 
 ## Contributors
 

@@ -104,14 +104,26 @@ function game() {
         if (lastResult === "Correct!") {
             gameWon = true;
             let score = (maxAttempts - attempts + 1) * 10;
-            console.log("%cImpossible...\nYou survived. For now.", "color: green;");
+            console.log(
+                "%cImpossible...\nYou survived. For now.\n\n%cType %cgame()%c and press Enter to play again...",
+                "color: green;",
+                "color: inherit;",
+                "color: green;",
+                "color: inherit;"
+            );
             console.log(`Attempts: ${attempts} | Score: ${score}`);
             break;
         }
     }
 
     if (!gameWon) {
-        console.log("%cGame Over.\nThere was never a chance for you.", "color: red;");
+        console.log(
+            "%cGame Over.\nThere was never a chance for you.\n\n%cType %cgame()%c and press Enter to play again...",
+            "color: red;",
+            "color: inherit;",
+            "color: green;",
+            "color: inherit;"
+        );
         console.log(`The number was: ${correctNumber}`);
     }
 }

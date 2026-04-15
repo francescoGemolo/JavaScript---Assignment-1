@@ -19,21 +19,21 @@ const message = {
     ]
 };
 
-// Random message
+// Generate Random message
 const generateRandomMessage = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// Random Numbers
+// Generate Random Numbers
 function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
 
-// Compare the guess number with the secret one
 function checkGuess(guessNumber, correctNumber) {
     if (guessNumber < correctNumber) return "Low...";
     if (guessNumber > correctNumber) return "High...";
     return "Correct!";
 }
 
+// Security Logic
 function getPlayerGuess(currentMessage, currentLastGuess) {
     while (true) {
         let input = prompt(currentMessage);
@@ -52,7 +52,7 @@ function getPlayerGuess(currentMessage, currentLastGuess) {
             continue;
         }
 
-        // Repetition Memory Check
+        // Repetition
         if (num === currentLastGuess) {
             currentMessage = `...again?\nYou already tried ${num}.\nTry to be original:`;
             continue;
@@ -102,6 +102,7 @@ function game() {
 
         console.log(`Attempt ${attempts}: ${guessNumber} -> ${lastResult}`);
 
+        // Win
         if (lastResult === "Correct!") {
             gameWon = true;
             let score = (maxAttempts - attempts + 1) * 10;
@@ -117,6 +118,7 @@ function game() {
         }
     }
 
+    // Game Over
     if (!gameWon) {
         console.log(
             "%cGame Over.\nThere was never a chance for you.\n\n%cType %cgame()%c and press Enter to play again...",
@@ -129,7 +131,7 @@ function game() {
     }
 }
 
-// Input
+// Prompt
 console.log(
     "Welcome, human. Type %cgame()%c and press Enter to start...",
     "color: green;",

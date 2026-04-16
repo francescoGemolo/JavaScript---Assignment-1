@@ -106,6 +106,9 @@ function game() {
         if (lastResult === "Correct!") {
             gameWon = true;
             let score = (maxAttempts - attempts + 1) * 10;
+
+            console.log(`Attempts: ${attempts} | Score: ${score}`);
+
             console.log(
                 "%cImpossible...\nYou survived. For now.\n\n%cType %cgame()%c and press Enter to play again...",
                 "color: lime;",
@@ -113,7 +116,7 @@ function game() {
                 "color: green;",
                 "color: inherit;"
             );
-            console.log(`Attempts: ${attempts} | Score: ${score}`);
+
             break;
         }
     }

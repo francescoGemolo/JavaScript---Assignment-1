@@ -34,10 +34,18 @@ function getPlayerGuess(currentMessage, currentLastGuess) {
     while (true) {
         let input = prompt(currentMessage);
 
-        // Escape logic
+        // Escape logic with confirmation
         if (input === null) {
-            console.log("%cSystem override: Human escaped, for now.", "color: orange;");
-            return "Exit";
+            const shouldExit = confirm(
+                "Do you really want to disconnect, human?\nIf you leave now, the system will record your surrender."
+            );
+
+            if (shouldExit) {
+                return "Exit";
+            }
+
+            currentMessage = "Exit cancelled. Return to the game and enter a number (1-100):";
+            continue;
         }
 
         let num = Number(input);
@@ -87,7 +95,19 @@ function game() {
         }
 
         let guessNumber = getPlayerGuess(currentPrompt, lastGuess);
-        if (guessNumber === "Exit") return;
+        if (guessNumber === "Exit") {
+            console.log(
+                "%cSystem override: Human escaped, for now.",
+                "color: orange;"
+            );
+            console.log(
+                "%cType %cgame()%c and press Enter to play again...",
+                "color: inherit;",
+                "color: green;",
+                "color: inherit;"
+            );
+            return;
+        }
 
         // Update state
         attempts++;

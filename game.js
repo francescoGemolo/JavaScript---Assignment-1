@@ -136,7 +136,7 @@ function game() {
 
 // Init
 function init() {
-    alert("Access denied. Open the console (Ctrl + Shift + I) to view the instructions and prove your worth.");
+    alert("Access denied. Open the console (Ctrl + Shift + I) to view the instructions and prove your worth!");
 
     console.clear();
     console.log(

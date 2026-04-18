@@ -2,7 +2,15 @@
 
 # Number Guessing Game
 
-A simple JavaScript-based number guessing game where players try to guess a randomly generated number between 1 and 100 within 10 attempts. The game features a dramatic, AI-themed narrative to make the experience more engaging.
+A simple JavaScript-based number guessing game where players try to guess a randomly generated number between 1 and 100 within 10 attempts. The game features a dramatic, AI-themed narrative to make the experience more engaging. It runs in the browser console, using prompts for user input and console.log for feedback.
+
+## How to Play
+
+1. Open `index.html` in a web browser.
+2. An alert will appear; click OK.
+3. Open the browser console (F12 or Ctrl+Shift+I).
+4. Type `game()` and press Enter to start playing.
+5. Follow the prompts to guess the number.
 
 ## Code Overview
 
@@ -10,7 +18,7 @@ The project includes the following files:
 
 ### Files
 - `index.html`: A basic HTML page that loads the JavaScript.
-- `game.js`: Contains the game logic for the browser prompt version.
+- `game.js`: Contains the game logic for the browser console version.
 
 ### Key Functions
 The game uses these JavaScript functions:

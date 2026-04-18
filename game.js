@@ -34,7 +34,6 @@ function getPlayerGuess(currentMessage, currentLastGuess) {
     while (true) {
         let input = prompt(currentMessage);
 
-        // Escape logic with confirmation
         if (input === null) {
             const shouldExit = confirm(
                 "Do you really want to disconnect, human?\nIf you leave now, the system will record your surrender."
@@ -50,13 +49,11 @@ function getPlayerGuess(currentMessage, currentLastGuess) {
 
         let num = Number(input);
 
-        // Validation
         if (input.trim() === "" || isNaN(num) || !Number.isInteger(num) || num < 1 || num > 100) {
             currentMessage = `${generateRandomMessage(message.invalid)}\nRange: 1–100:`;
             continue;
         }
 
-        // Repetition
         if (num === currentLastGuess) {
             currentMessage = `...again?\nYou already tried ${num}.\nTry to be original:`;
             continue;
@@ -82,7 +79,6 @@ function game() {
         if (attempts === 0) {
             currentPrompt = intro;
         } else {
-            // Dynamic Feedback
             let feedback = (lastResult === "Low...")
                 ? generateRandomMessage(message.low)
                 : generateRandomMessage(message.high);
@@ -95,9 +91,10 @@ function game() {
         }
 
         let guessNumber = getPlayerGuess(currentPrompt, lastGuess);
+
         if (guessNumber === "Exit") {
             console.log(
-                "%cSystem override: Human escaped, for now.",
+                "%cSystem override: Human escaped, for now.\n",
                 "color: orange;"
             );
             console.log(
@@ -109,14 +106,12 @@ function game() {
             return;
         }
 
-        // Update state
         attempts++;
         lastGuess = guessNumber;
         lastResult = checkGuess(guessNumber, correctNumber);
 
         console.log(`Attempt ${attempts}: ${guessNumber} -> ${lastResult}`);
 
-        // Win
         if (lastResult === "Correct!") {
             gameWon = true;
             let score = (maxAttempts - attempts + 1) * 10;
@@ -130,12 +125,10 @@ function game() {
                 "color: green;",
                 "color: inherit;"
             );
-
             break;
         }
     }
 
-    // Game Over
     if (!gameWon) {
         console.log(
             "%cGame Over.\nThere was never a chance for you.\n\n%cType %cgame()%c and press Enter to play again...",
@@ -149,7 +142,7 @@ function game() {
 }
 
 function init() {
-    alert("Access denied. Open the console to view the instructions and prove your worth!\n\nWindows/Linux: Ctrl + Shift + I\nMac: Cmd + Option + I\nMobile: open this page in desktop mode or use a PC/Mac for the console.");
+    alert("Access denied. Open the console to view the instructions and prove your worth!\n\nWindows/Linux: Ctrl + Shift + I\nMac: Cmd + Option + I");
 
     console.clear();
     console.log(

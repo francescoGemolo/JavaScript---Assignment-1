@@ -1,4 +1,3 @@
-// Array for random message
 const message = {
     low: [
         "Too low. Predictable.",
@@ -19,10 +18,8 @@ const message = {
     ]
 };
 
-// Generate Random message
 const generateRandomMessage = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// Generate Random Numbers
 function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
 }
@@ -33,7 +30,6 @@ function checkGuess(guessNumber, correctNumber) {
     return "Correct!";
 }
 
-// Security Logic
 function getPlayerGuess(currentMessage, currentLastGuess) {
     while (true) {
         let input = prompt(currentMessage);
@@ -62,7 +58,6 @@ function getPlayerGuess(currentMessage, currentLastGuess) {
     }
 }
 
-// Main Logic
 function game() {
     const correctNumber = generateRandomNumber();
     const maxAttempts = 10;
@@ -91,7 +86,6 @@ function game() {
             }
         }
 
-        // Wait for input
         let guessNumber = getPlayerGuess(currentPrompt, lastGuess);
         if (guessNumber === "Exit") return;
 
@@ -134,7 +128,6 @@ function game() {
     }
 }
 
-// Init
 function init() {
     alert("Access denied. Open the console (Ctrl + Shift + I) to view the instructions and prove your worth!");
 
@@ -148,5 +141,4 @@ function init() {
     );
 }
 
-// Prompt
 init();

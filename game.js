@@ -134,9 +134,19 @@ function game() {
     }
 }
 
+// Init
+function init() {
+    alert("Access Denied: open the Console (Ctrl + Shift +I) to prove your worth.");
+
+    console.clear();
+    console.log(
+        "%cSYSTEM MALFUNCTION%c\n\nTo bypass security, you must execute the bypass sequence.\n\nType %cgame()%c and press Enter to begin the breach.",
+        "color: red;",
+        "color: inherit;",
+        "color: green;",
+        "color: inherit;"
+    );
+}
+
 // Prompt
-console.log(
-    "Welcome, human. Type %cgame()%c and press Enter to start...",
-    "color: green;",
-    "color: inherit;"
-);
+init();
